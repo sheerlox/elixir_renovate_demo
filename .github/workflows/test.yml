@@ -20,7 +20,7 @@ jobs:
     steps:
       # note: probably don't use that action it has a few known bugs I probably will never fix.
       # Instead take a look at: https://github.com/fkirc/skip-duplicate-actions
-      - uses: insurgent-lab/is-in-pr-action@v0.2.0
+      - uses: insurgent-lab/is-in-pr-action@129df59687402c4a9c81a9a9e88d7448cdbba541 # v0.2.0
         id: isInPR
     outputs:
       should-run: ${{ !(steps.isInPR.outputs.result == 'true' && github.event_name == 'push') }}
@@ -37,17 +37,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
 
       - name: Set up BEAM
         id: setup-beam
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@0a541161e47ec43ccbd9510053c5f336ca76c2a2 # v1
         with:
           version-type: strict
           version-file: .tool-versions
 
       - name: Restore dependencies cache
-        uses: actions/cache@v4
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
         env:
           cache-key: deps
         with:
@@ -83,7 +83,7 @@ jobs:
 
       - name: Restore PLTs cache
         id: restore_plts_cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
         env:
           cache-key: plts
         with:
@@ -102,7 +102,7 @@ jobs:
           mix dialyzer --plt
 
       - name: Save PLTs cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
         env:
           cache-key: plts
         if: steps.restore_plts_cache.outputs.cache-hit != 'true'
