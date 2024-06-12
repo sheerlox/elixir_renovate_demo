@@ -9,7 +9,8 @@ defmodule ElixirRenovateDemo.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: dialyzer()
     ]
   end
 
@@ -26,6 +27,13 @@ defmodule ElixirRenovateDemo.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp dialyzer() do
+    [
+      plt_local_path: "priv/plts/project.plt",
+      plt_core_path: "priv/plts/core.plt"
+    ]
+  end
 
   # Specifies your project dependencies.
   #
@@ -57,7 +65,8 @@ defmodule ElixirRenovateDemo.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.2"}
+      {:bandit, "~> 1.2"},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 

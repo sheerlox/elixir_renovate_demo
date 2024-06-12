@@ -1,0 +1,117 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  # ignore the push event trigger if a PR is open for the current branch
+  prevent_duplicate_checks:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: read
+
+    steps:
+      # note: probably don't use that action it has a few known bugs I probably will never fix.
+      # Instead take a look at: https://github.com/fkirc/skip-duplicate-actions
+      - uses: insurgent-lab/is-in-pr-action@v0.2.0
+        id: isInPR
+    outputs:
+      should-run: ${{ !(steps.isInPR.outputs.result == 'true' && github.event_name == 'push') }}
+
+  test:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    needs: prevent_duplicate_checks
+    if: ${{ needs.prevent_duplicate_checks.outputs.should-run == 'true' }}
+
+    env:
+      MIX_ENV: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up BEAM
+        id: setup-beam
+        uses: erlef/setup-beam@v1
+        with:
+          version-type: strict
+          version-file: .tool-versions
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v4
+        env:
+          cache-key: deps
+        with:
+          key: ${{ env.cache-key }}-${{ runner.os }}-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ hashFiles('**/mix.lock') }}-git-${{ github.sha }}
+          restore-keys: |
+            ${{ env.cache-key }}-${{ runner.os }}-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ hashFiles('**/mix.lock') }}-
+            ${{ env.cache-key }}-${{ runner.os }}-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-
+          path: |
+            deps
+            _build
+
+      - name: Install dependencies
+        run: |
+          mix local.hex --force
+          mix do deps.get, deps.compile
+
+      - name: Check formatting
+        run: mix format --check-formatted
+
+      - name: Compile code (without warning)
+        run: mix compile --warnings-as-errors
+
+      - name: Run the database service
+        run: docker compose --env-file .env.test up -d db --wait
+
+      - name: Apply database migrations
+        run: mix ecto.migrate
+
+      - name: Run tests
+        run: mix test
+
+      # Dialyzer
+
+      - name: Restore PLTs cache
+        id: restore_plts_cache
+        uses: actions/cache/restore@v4
+        env:
+          cache-key: plts
+        with:
+          key: ${{ env.cache-key }}-${{ runner.os }}-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ hashFiles('**/mix.lock') }}-git-${{ github.sha }}
+          restore-keys: |
+            ${{ env.cache-key }}-${{ runner.os }}-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ hashFiles('**/mix.lock') }}-
+            ${{ env.cache-key }}-${{ runner.os }}-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-
+          path: priv/plts
+
+      - name: Create PLTs
+        if: steps.restore_plts_cache.outputs.cache-hit != 'true'
+        env:
+          MIX_ENV: dev
+        run: |
+          mkdir -p priv/plts/core.plt
+          mix dialyzer --plt
+
+      - name: Save PLTs cache
+        uses: actions/cache/save@v4
+        env:
+          cache-key: plts
+        if: steps.restore_plts_cache.outputs.cache-hit != 'true'
+        with:
+          key: ${{ env.cache-key }}-${{ runner.os }}-${{ steps.setup-beam.outputs.otp-version }}-${{ steps.setup-beam.outputs.elixir-version }}-${{ hashFiles('**/mix.lock') }}-git-${{ github.sha }}
+          path: priv/plts
+
+      - name: Run dialyzer
+        env:
+          MIX_ENV: dev
+        run: mix dialyzer --format github
+
