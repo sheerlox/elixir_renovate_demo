@@ -48,3 +48,5 @@ the rules from my base preset directly in your config
 - [Renovate documentation](https://docs.renovatebot.com/)
 - [Renovate developer portal](https://developer.mend.io/github/): a place to
 monitor its activity on your repo and view logs.
+- [How should you pin dependencies and why?](https://the-guild.dev/blog/how-should-you-pin-dependencies-and-why):
+although it's for JS, I believe it is an interesting read for Elixir as well.

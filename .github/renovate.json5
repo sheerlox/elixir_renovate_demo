@@ -9,8 +9,19 @@
     "github>insurgent-lab/.github//renovate/base",
 
      // This preset allows us to use the version comments in Dockerfile.
-    "regexManagers:dockerfileVersions"
+    "regexManagers:dockerfileVersions",
+
+    // In applications (as opposed to libraries where ranges matter for
+    // compatibility), pinning all dependencies is a good idea as it improves
+    // build reproducibility. It also has the advantage of providing more
+    // visibility on which versions are installed than lock files.
+    // See https://the-guild.dev/blog/how-should-you-pin-dependencies-and-why
+    ":pinVersions"
   ],
+
+  // Ignore this preset which is included in my base config (see :pinVersions).
+  "ignorePresets": [":pinOnlyDevDependencies"],
+
   "packageRules": [
     /**
      * ==================================
