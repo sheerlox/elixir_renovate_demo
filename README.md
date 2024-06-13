@@ -37,13 +37,22 @@ this order: Debian > OTP > Elixir.
 directory
 2. Copy [`.github/workflows/test-docker-build.yml`](./.github/workflows/test-docker-build.yml)
 to your `.github/workflows/` directory
-2. Add the version comments in [`Dockerfile`](./Dockerfile)
+2. Add the version comments and `base` build stage in
+[`Dockerfile`](./Dockerfile)
 3. Pick what you want / customize to your liking. You might also want to copy
 the rules from my base preset directly in your config
 4. [Install Renovate to your repository](https://github.com/apps/renovate/installations/select_target)
 5. Profit!
 
-## More information
+## Notes
+
+- The "Test Docker Build" workflow targets the `base` build stage to only test
+base image existence. The rationale behind this choice is to reduce feedback
+cycles and cost less Action credits (in this repository the full build is only
+~1 min, but once your application grows it can increase significantly). If you
+want to test the full image build, change the target to `builder` instead.
+
+## Learn more
 
 - [Renovate documentation](https://docs.renovatebot.com/)
 - [Renovate developer portal](https://developer.mend.io/github/): a place to
