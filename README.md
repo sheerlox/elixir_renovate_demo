@@ -58,6 +58,14 @@ cycles and cost less Action credits (in this repository the full build is only
 ~1 min, but once your application grows it can increase significantly). If you
 want to test the full image build, change the target to `builder` instead.
 
+## Get in touch!
+
+If you're interested in automating your Elixir workflows, don't hesitate to
+reach out, I'll be glad to give a hand!
+
+- X (formerly Twitter): [`@_sheerlox`](https://x.com/_sheerlox)
+- Discord: [`sheerlox`](https://discord.com/users/245606496606486534)
+
 ## Learn more
 
 - [Renovate documentation](https://docs.renovatebot.com/)
