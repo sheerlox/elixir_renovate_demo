@@ -16,6 +16,12 @@ languages and tools.
 - Keeps Elixir/OTP versions in sync between `asdf` (`.tool-versions`) and
 production Docker
 
+## Example commits / PRs
+
+- [chore(deps): update dependency elixir to v1.17.0](https://github.com/sheerlox/elixir_renovate_demo/commit/f888a66baf616c3b40d55dd6bf09dc3a7b0105c1) ([#9](https://github.com/sheerlox/elixir_renovate_demo/pull/9))
+- [chore(deps): update dependency erlang to v27](https://github.com/sheerlox/elixir_renovate_demo/commit/6ac6d5cacbb0fcf96bd5869fed0e5681dc848849) ([#10](https://github.com/sheerlox/elixir_renovate_demo/pull/10))
+- [chore(deps): update debian docker tag to bullseye-20240612-slim](https://github.com/sheerlox/elixir_renovate_demo/commit/db74f3f469493535883ec9ded8baf8127bb951aa) ([#12](https://github.com/sheerlox/elixir_renovate_demo/pull/12))
+
 ## How does it work
 
 1. We use version comments in [`Dockerfile`](./Dockerfile) to tell Renovate
