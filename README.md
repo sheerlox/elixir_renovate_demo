@@ -1,7 +1,10 @@
-# ElixirRenovateDemo
+# ElixirRenovateDemo (app)
 
 A repository showcasing using Renovate on an Elixir project (here a Phoenix app
 deployed to [Fly.io](https://fly.io/)).
+
+See [`elixir_renovate_demo_lib`](https://github.com/sheerlox/elixir_renovate_demo_lib)
+for the equivalent setup on dummy library.
 
 [Renovate](https://github.com/renovatebot/renovate) is a highly-configurable
 dependency management bot that automates update PRs.
@@ -12,7 +15,7 @@ languages and tools.
 
 ## Benefits of this particular config
 
-- Automatically updates the `hexpm/elixir` Docker base image tag (for Fly)
+- Automatically updates the `hexpm/elixir` Docker base image tag (for Fly.io)
 - Keeps Elixir/OTP versions in sync between `asdf` (`.tool-versions`) and
 production Docker
 
