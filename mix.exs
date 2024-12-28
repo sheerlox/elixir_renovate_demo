@@ -49,7 +49,7 @@ defmodule ElixirRenovateDemo.MixProject do
       {:phoenix_live_view, "== 0.20.15"},
       {:floki, "== 0.36.2", only: :test},
       {:phoenix_live_dashboard, "== 0.8.3"},
-      {:esbuild, "== 0.8.1", runtime: Mix.env() == :dev},
+      {:esbuild, "== 0.8.2", runtime: Mix.env() == :dev},
       {:tailwind, "== 0.2.3", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
