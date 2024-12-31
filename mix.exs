@@ -58,7 +58,7 @@ defmodule ElixirRenovateDemo.MixProject do
        app: false,
        compile: false,
        depth: 1},
-      {:swoosh, "== 1.16.9"},
+      {:swoosh, "== 1.17.6"},
       {:finch, "== 0.18.0"},
       {:telemetry_metrics, "== 1.0.0"},
       {:telemetry_poller, "== 1.1.0"},
