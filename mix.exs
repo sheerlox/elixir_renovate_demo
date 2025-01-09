@@ -47,7 +47,7 @@ defmodule ElixirRenovateDemo.MixProject do
       {:phoenix_html, "== 4.1.1"},
       {:phoenix_live_reload, "== 1.5.3", only: :dev},
       {:phoenix_live_view, "== 0.20.17"},
-      {:floki, "== 0.36.2", only: :test},
+      {:floki, "== 0.37.0", only: :test},
       {:phoenix_live_dashboard, "== 0.8.6"},
       {:esbuild, "== 0.8.1", runtime: Mix.env() == :dev},
       {:tailwind, "== 0.2.3", runtime: Mix.env() == :dev},
@@ -58,7 +58,7 @@ defmodule ElixirRenovateDemo.MixProject do
        app: false,
        compile: false,
        depth: 1},
-      {:swoosh, "== 1.16.9"},
+      {:swoosh, "== 1.17.6"},
       {:finch, "== 0.18.0"},
       {:telemetry_metrics, "== 1.0.0"},
       {:telemetry_poller, "== 1.1.0"},
@@ -66,7 +66,7 @@ defmodule ElixirRenovateDemo.MixProject do
       {:jason, "== 1.4.4"},
       {:dns_cluster, "== 0.1.3"},
       {:bandit, "== 1.5.4"},
-      {:dialyxir, "== 1.4.3", only: [:dev, :test], runtime: false}
+      {:dialyxir, "== 1.4.5", only: [:dev, :test], runtime: false}
     ]
   end
 
