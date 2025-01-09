@@ -21,6 +21,14 @@
 
   "packageRules": [
     /**
+     * Enable the mix manager (which is deactivated by my base config).
+     */
+    {
+      "matchManagers": ["mix"],
+      "enabled": true
+    },
+
+    /**
      * =======================
      * Update runtime versions
      * =======================
