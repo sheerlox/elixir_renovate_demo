@@ -19,12 +19,21 @@
     ":pinVersions"
   ],
 
-  /**
-   * Enable the mix manager (which is deactivated by my base config).
-   */
-  "mix": { "enabled": true },
-
   "packageRules": [
+    /**
+     * =======================
+     * Update runtime versions
+     * =======================
+     */
+
+    {
+      "matchManagers": ["regex", "asdf"],
+      "matchPackagePatterns": ["debian", "erlang", "elixir"],
+      "semanticCommitType": "build",
+      "semanticCommitScope": "runtime",
+      "schedule": "at any time"
+    },
+
     /**
      * ==================================
      * Adjustments for the debian version
@@ -33,7 +42,7 @@
 
     /**
      * Special versioning regex for debian docker image, which keeps the
-     * flavor intact (e.g. "bookworm"). In case you 
+     * flavor intact (e.g. "bookworm").
      * See https://github.com/renovatebot/renovate/discussions/27806#discussioncomment-9340882
      */
     {
@@ -73,12 +82,24 @@
       "semanticCommitScope": "deps"
     },
 
+    /**
+     * ===================
+     * Other misc settings
+     * ===================
+     */
     {
       "matchManagers": ["docker-compose"],
       "matchPackageNames": ["postgres"],
       "semanticCommitType": "chore",
       "semanticCommitScope": "docker"
     },
+    {
+      "matchDepNames": ["flyctl"],
+      "matchFileNames": [".github/workflows/*.yml"],
+      "semanticCommitType": "ci",
+      "semanticCommitScope": "action"
+    },
+
   ]
 }
 
