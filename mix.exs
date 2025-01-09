@@ -66,7 +66,7 @@ defmodule ElixirRenovateDemo.MixProject do
       {:jason, "== 1.4.4"},
       {:dns_cluster, "== 0.1.3"},
       {:bandit, "== 1.5.4"},
-      {:dialyxir, "== 1.4.3", only: [:dev, :test], runtime: false}
+      {:dialyxir, "== 1.4.5", only: [:dev, :test], runtime: false}
     ]
   end
 
