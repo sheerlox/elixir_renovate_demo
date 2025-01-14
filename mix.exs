@@ -62,7 +62,7 @@ defmodule ElixirRenovateDemo.MixProject do
       {:finch, "== 0.19.0"},
       {:telemetry_metrics, "== 1.0.0"},
       {:telemetry_poller, "== 1.1.0"},
-      {:gettext, "== 0.24.0"},
+      {:gettext, "== 0.26.2"},
       {:jason, "== 1.4.4"},
       {:dns_cluster, "== 0.1.3"},
       {:bandit, "== 1.6.3"},
