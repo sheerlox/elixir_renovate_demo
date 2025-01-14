@@ -17,7 +17,7 @@ ARG ELIXIR_VERSION=1.18.1
 # renovate: datasource=github-tags depName=erlang packageName=erlang/otp versioning=regex:^(?<major>\d+?)\.(?<minor>\d+?)(\.(?<patch>\d+))?$ extractVersion=^OTP-(?<version>\S+)
 ARG OTP_VERSION=27.2
 # renovate: datasource=docker depName=debian packageName=debian
-ARG DEBIAN_VERSION=bullseye-20241223-slim
+ARG DEBIAN_VERSION=bullseye-20250113-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
