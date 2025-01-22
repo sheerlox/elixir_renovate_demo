@@ -13,7 +13,7 @@
 #
 
 # renovate: datasource=hexpm-bob depName=elixir
-ARG ELIXIR_VERSION=1.18.1
+ARG ELIXIR_VERSION=1.18.2
 # renovate: datasource=github-tags depName=erlang packageName=erlang/otp versioning=regex:^(?<major>\d+?)\.(?<minor>\d+?)(\.(?<patch>\d+))?$ extractVersion=^OTP-(?<version>\S+)
 ARG OTP_VERSION=27.2
 # renovate: datasource=docker depName=debian packageName=debian
