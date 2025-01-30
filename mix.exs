@@ -65,7 +65,7 @@ defmodule ElixirRenovateDemo.MixProject do
       {:gettext, "== 0.24.0"},
       {:jason, "== 1.4.4"},
       {:dns_cluster, "== 0.1.3"},
-      {:bandit, "== 1.6.3"},
+      {:bandit, "== 1.6.7"},
       {:dialyxir, "== 1.4.5", only: [:dev, :test], runtime: false}
     ]
   end
