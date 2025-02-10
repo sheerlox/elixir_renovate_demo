@@ -43,7 +43,7 @@ defmodule ElixirRenovateDemo.MixProject do
       {:phoenix, "== 1.7.18"},
       {:phoenix_ecto, "== 4.6.3"},
       {:ecto_sql, "== 3.12.1"},
-      {:postgrex, "== 0.19.3"},
+      {:postgrex, "== 0.20.0"},
       {:phoenix_html, "== 4.2.0"},
       {:phoenix_live_reload, "== 1.5.3", only: :dev},
       {:phoenix_live_view, "== 0.20.17"},
